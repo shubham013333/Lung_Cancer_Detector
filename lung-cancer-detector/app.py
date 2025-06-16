@@ -54,3 +54,10 @@ if submit:
 
     prediction = model.predict(input_df)[0]
     st.write("🧪 Prediction Result:", "🟥 **Lung Cancer Detected**" if prediction == 1 else "🟩 **No Lung Cancer**")
+
+try:
+    model = joblib.load("models/lung_model.pkl")
+    columns = joblib.load("models/feature_columns.pkl")
+except FileNotFoundError:
+    st.error("🚫 Model files not found! Please train the model using `lung_model.py`.")
+    st.stop()
